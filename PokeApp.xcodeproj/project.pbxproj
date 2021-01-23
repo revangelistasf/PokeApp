@@ -13,6 +13,10 @@
 		4636BF8825BC5D5000012FDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4636BF8625BC5D5000012FDD /* Main.storyboard */; };
 		4636BF8A25BC5D5100012FDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4636BF8925BC5D5100012FDD /* Assets.xcassets */; };
 		4636BF8D25BC5D5100012FDD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4636BF8B25BC5D5100012FDD /* LaunchScreen.storyboard */; };
+		4636BF9625BC6D3A00012FDD /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4636BF9525BC6D3A00012FDD /* AppCoordinator.swift */; };
+		4636BF9C25BC908F00012FDD /* PokemonListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4636BF9B25BC908F00012FDD /* PokemonListCoordinator.swift */; };
+		4636BFA025BC93E200012FDD /* PokemonListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4636BF9F25BC93E200012FDD /* PokemonListViewController.swift */; };
+		4636BFA625BC977000012FDD /* PokemonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4636BFA525BC977000012FDD /* PokemonCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		4636BF8925BC5D5100012FDD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4636BF8C25BC5D5100012FDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4636BF8E25BC5D5100012FDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4636BF9525BC6D3A00012FDD /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		4636BF9B25BC908F00012FDD /* PokemonListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListCoordinator.swift; sourceTree = "<group>"; };
+		4636BF9F25BC93E200012FDD /* PokemonListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListViewController.swift; sourceTree = "<group>"; };
+		4636BFA525BC977000012FDD /* PokemonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +64,9 @@
 		4636BF7F25BC5D5000012FDD /* PokeApp */ = {
 			isa = PBXGroup;
 			children = (
+				4636BF9825BC6D3F00012FDD /* Coordinators */,
+				4636BF9E25BC93CF00012FDD /* Controllers */,
+				4636BFA325BC974200012FDD /* Views */,
 				4636BF8025BC5D5000012FDD /* AppDelegate.swift */,
 				4636BF8225BC5D5000012FDD /* SceneDelegate.swift */,
 				4636BF8425BC5D5000012FDD /* ViewController.swift */,
@@ -65,6 +76,39 @@
 				4636BF8E25BC5D5100012FDD /* Info.plist */,
 			);
 			path = PokeApp;
+			sourceTree = "<group>";
+		};
+		4636BF9825BC6D3F00012FDD /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				4636BF9525BC6D3A00012FDD /* AppCoordinator.swift */,
+				4636BF9B25BC908F00012FDD /* PokemonListCoordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		4636BF9E25BC93CF00012FDD /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4636BF9F25BC93E200012FDD /* PokemonListViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		4636BFA325BC974200012FDD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4636BFA425BC976200012FDD /* Cell */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4636BFA425BC976200012FDD /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				4636BFA525BC977000012FDD /* PokemonCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,6 +121,7 @@
 				4636BF7925BC5D5000012FDD /* Sources */,
 				4636BF7A25BC5D5000012FDD /* Frameworks */,
 				4636BF7B25BC5D5000012FDD /* Resources */,
+				4636BF9925BC905A00012FDD /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -132,13 +177,37 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4636BF9925BC905A00012FDD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4636BF7925BC5D5000012FDD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4636BF9625BC6D3A00012FDD /* AppCoordinator.swift in Sources */,
 				4636BF8525BC5D5000012FDD /* ViewController.swift in Sources */,
 				4636BF8125BC5D5000012FDD /* AppDelegate.swift in Sources */,
+				4636BF9C25BC908F00012FDD /* PokemonListCoordinator.swift in Sources */,
+				4636BFA025BC93E200012FDD /* PokemonListViewController.swift in Sources */,
+				4636BFA625BC977000012FDD /* PokemonCell.swift in Sources */,
 				4636BF8325BC5D5000012FDD /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
