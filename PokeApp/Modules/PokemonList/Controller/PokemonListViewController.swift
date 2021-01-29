@@ -26,7 +26,7 @@ class PokemonListViewController: UIViewController {
     }
     
     private func configureView() {
-        view.backgroundColor = .systemGreen
+        view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
         title = "Pokedex"
     }
@@ -87,6 +87,8 @@ extension PokemonListViewController: UICollectionViewDataSource, UICollectionVie
         if let pokemonItem = viewModel?.pokemon(from: indexPath) {
             cell.pokemonNameLabel.text = pokemonItem.name.capitalized
             cell.pokemonImageView.loadImageFromUrl(pokemonItem.pokemon?.sprite.url, completion: {
+                let backgroundColors = UIColor.getBackgroundColor(by: (pokemonItem.pokemon?.types.map{$0.name}.first)!)
+                cell.setColor(primary: backgroundColors.0, secondary: backgroundColors.1)
                 collectionView.reloadItems(at: [indexPath])
             })
         }

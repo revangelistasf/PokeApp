@@ -13,7 +13,7 @@ class PokemonBoxView: UIView {
         var builderView = UIView()
         builderView.translatesAutoresizingMaskIntoConstraints = false
         builderView.layer.cornerRadius = 10
-        builderView.backgroundColor = .white
+        builderView.backgroundColor = .systemBackground
         addSubview(builderView)
         return builderView
     }()

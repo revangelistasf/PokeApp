@@ -35,7 +35,13 @@ class PokemonCell: UICollectionViewCell {
         configurePokemonNameLabel()
     }
     
+    func setColor(primary: UIColor, secondary: UIColor) {
+        layer.borderColor = primary.cgColor
+        backgroundColor = secondary
+    }
+    
     private func configureCell() {
+        layer.borderWidth = 3
         layer.cornerRadius = 15
         backgroundColor = .systemBackground
         pokemonNameLabel.textAlignment = .center

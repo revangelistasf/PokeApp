@@ -9,12 +9,19 @@ import UIKit
 
 class PokemonDetailsViewController: UIViewController {
     
+    lazy var scrollView: UIScrollView = {
+        let buildScrollView = UIScrollView()
+        buildScrollView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(buildScrollView)
+        return buildScrollView
+    }()
+    
     private lazy var imageContainer: UIView = {
         let buildView = UIView()
         buildView.translatesAutoresizingMaskIntoConstraints = false
         buildView.layer.cornerRadius = cornerRadius
         buildView.backgroundColor = .systemBackground
-        view.addSubview(buildView)
+        scrollView.addSubview(buildView)
         return buildView
     }()
     
@@ -28,42 +35,42 @@ class PokemonDetailsViewController: UIViewController {
     private lazy var typePokemonBoxView: PokemonBoxView = {
         let buildPokemonBoxView = PokemonBoxView()
         buildPokemonBoxView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(buildPokemonBoxView)
+        scrollView.addSubview(buildPokemonBoxView)
         return buildPokemonBoxView
     }()
     
     private lazy var abilityPokemonBoxView: PokemonBoxView = {
         let buildPokemonBoxView2 = PokemonBoxView()
         buildPokemonBoxView2.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(buildPokemonBoxView2)
+        scrollView.addSubview(buildPokemonBoxView2)
         return buildPokemonBoxView2
     }()
     
     private lazy var heightPokemonBoxView: PokemonBoxView = {
         let buildPokemonBoxView = PokemonBoxView()
         buildPokemonBoxView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(buildPokemonBoxView)
+        scrollView.addSubview(buildPokemonBoxView)
         return buildPokemonBoxView
     }()
     
     private lazy var weightPokemonBoxView: PokemonBoxView = {
         let buildPokemonBoxView = PokemonBoxView()
         buildPokemonBoxView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(buildPokemonBoxView)
+        scrollView.addSubview(buildPokemonBoxView)
         return buildPokemonBoxView
     }()
     
     private lazy var expPokemonBoxView: PokemonBoxView = {
         let buildPokemonBoxView = PokemonBoxView()
         buildPokemonBoxView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(buildPokemonBoxView)
+        scrollView.addSubview(buildPokemonBoxView)
         return buildPokemonBoxView
     }()
     
     private lazy var statusPokemonBoxView: PokemonBoxView = {
         let buildPokemonBoxView = PokemonBoxView()
         buildPokemonBoxView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(buildPokemonBoxView)
+        scrollView.addSubview(buildPokemonBoxView)
         return buildPokemonBoxView
     }()
     
@@ -97,8 +104,8 @@ class PokemonDetailsViewController: UIViewController {
         }
         
         let backgroundColors = UIColor.getBackgroundColor(by: pokemon.types.map{$0.name}.first!)
-            view.backgroundColor = backgroundColors.0
-            accentColor = backgroundColors.1
+        view.backgroundColor = backgroundColors.0
+        accentColor = backgroundColors.1
         
         typePokemonBoxView.set(tile: "Type",
                                description: pokemon.types.map{$0.name}.joined(separator: "\n").capitalized,
@@ -130,7 +137,12 @@ class PokemonDetailsViewController: UIViewController {
     
     private func configureImageContainer(_ safeArea: UILayoutGuide) {
         NSLayoutConstraint.activate([
-            imageContainer.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: padding),
+            scrollView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
+            
+            imageContainer.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: padding),
             imageContainer.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: padding),
             imageContainer.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -padding),
             imageContainer.heightAnchor.constraint(equalToConstant: 128),
@@ -166,7 +178,8 @@ class PokemonDetailsViewController: UIViewController {
             
             statusPokemonBoxView.topAnchor.constraint(equalTo: expPokemonBoxView.bottomAnchor, constant: innerSpace),
             statusPokemonBoxView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: padding),
-            statusPokemonBoxView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -padding)
+            statusPokemonBoxView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -padding),
+            statusPokemonBoxView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -padding)
             
         ])
     }
