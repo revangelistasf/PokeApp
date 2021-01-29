@@ -71,6 +71,7 @@ class PokemonDetailsViewController: UIViewController {
     let cornerRadius: CGFloat = 10
     let padding: CGFloat = 16
     let innerSpace: CGFloat = 8
+    var accentColor: UIColor!
     
     convenience init(viewModel: PokemonDetailViewModelProtocol) {
         self.init()
@@ -79,7 +80,6 @@ class PokemonDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGreen
         configureView()
         configureFields()
     }
@@ -96,23 +96,34 @@ class PokemonDetailsViewController: UIViewController {
             print("pokemon loaded")
         }
         
+        let backgroundColors = UIColor.getBackgroundColor(by: pokemon.types.map{$0.name}.first!)
+            view.backgroundColor = backgroundColors.0
+            accentColor = backgroundColors.1
+        
         typePokemonBoxView.set(tile: "Type",
-                               description: pokemon.types.map{$0.name}.joined(separator: "\n").capitalized)
+                               description: pokemon.types.map{$0.name}.joined(separator: "\n").capitalized,
+                               backgroundColor: self.accentColor)
         
         abilityPokemonBoxView.set(tile: "Abilities",
-                                  description: pokemon.abilities.map{$0.name}.joined(separator: "\n").capitalized)
+                                  description: pokemon.abilities.map{$0.name}.joined(separator: "\n").capitalized,
+                                  backgroundColor: self.accentColor)
         
-        heightPokemonBoxView.set(tile: "Height", description: "\(Double(pokemon.height/10)) m")
-        weightPokemonBoxView.set(tile: "Weight", description: "\(Double(pokemon.weight/10)) kg")
-        expPokemonBoxView.set(tile: "Base experience", description: String(pokemon.baseExperience))
+        heightPokemonBoxView.set(tile: "Height", description: "\(Double(pokemon.height/10)) m",
+                                 backgroundColor: self.accentColor)
+        weightPokemonBoxView.set(tile: "Weight", description: "\(Double(pokemon.weight/10)) kg",
+                                 backgroundColor: self.accentColor)
+        expPokemonBoxView.set(tile: "Base experience", description: String(pokemon.baseExperience),
+                              backgroundColor: self.accentColor)
         
         statusPokemonBoxView.set(tile: "Status",
                                  description: pokemon.stats.map{"\($0.name): \($0.baseStat)"}
-                                                           .joined(separator: "\n").capitalized)
+                                    .joined(separator: "\n").capitalized,
+                                 backgroundColor: self.accentColor)
     }
     
     private func configureView() {
         let safeArea = view.safeAreaLayoutGuide
+        view.backgroundColor = .systemGreen
         configureImageContainer(safeArea)
         configureInfoView(safeArea)
     }

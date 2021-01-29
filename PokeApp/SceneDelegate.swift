@@ -23,6 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        let navigationController = UINavigationController(rootViewController: PokemonDetailsViewController())
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
+        self.window?.tintColor = .systemBackground
         self.window?.windowScene = scene        
     }
 

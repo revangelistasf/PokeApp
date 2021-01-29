@@ -69,6 +69,7 @@ extension PokemonListViewController: PokemonListViewModelDelegate {
     }
     
     func pokemonListDidFinishFetch() {
+        dismissLoadingView()
         collectionView.reloadData()
     }
 }
@@ -107,6 +108,7 @@ extension PokemonListViewController: UICollectionViewDataSource, UICollectionVie
         let height = scrollView.frame.size.height
         
         if offsetY > contentHeight - height {
+            showLoadingView()
             self.viewModel?.fetchNextPokemonPage()
         }
     }

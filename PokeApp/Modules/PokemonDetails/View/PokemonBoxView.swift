@@ -85,9 +85,11 @@ class PokemonBoxView: UIView {
         ])
     }
     
-    func set(tile: String, description: String) {
+    func set(tile: String, description: String, backgroundColor: UIColor?) {
         titleLabel.text = tile
         descriptionLabel.text = description
+        guard let bgColor = backgroundColor else { return }
+        self.backgroundColor = bgColor
     }
     
 }

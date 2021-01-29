@@ -32,7 +32,7 @@ enum PokeAPI {
     var queryItems: [URLQueryItem] {
         switch self {
         case .pokemon:
-            return [URLQueryItem(name: "limit", value: "30")]
+            return [URLQueryItem(name: "limit", value: "50")]
         }
     }
     
