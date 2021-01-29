@@ -10,7 +10,6 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var appCoordinator: AppCoordinator?
 
     func scene(_ scene: UIScene,
                willConnectTo session: UISceneSession,
@@ -19,8 +18,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: scene)
         self.window = window
-
-        self.appCoordinator = AppCoordinator(window: window)
-        appCoordinator?.start()
+        let pokemonListViewController = PokemonListViewController(viewModel: PokemonListViewModel())
+        let navigationController = UINavigationController(rootViewController: pokemonListViewController)
+//        let navigationController = UINavigationController(rootViewController: PokemonDetailsViewController())
+        self.window?.rootViewController = navigationController
+        self.window?.makeKeyAndVisible()
+        self.window?.windowScene = scene        
     }
+
 }
